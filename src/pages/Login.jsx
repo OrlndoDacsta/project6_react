@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState("");
   const [errorLogin, setErrorLogin] = useState(null);
 
   const navigate = useNavigate();
@@ -30,7 +30,12 @@ const Login = () => {
       .post("https://api.mudoapi.tech/login", payload)
       .then((res) => {
         console.log(res);
-        setToken(res.data.data.token);
+        const token = res.data.data.token;
+        setToken(token);
+
+        //Menyimpan token di dalam localStroge
+        console.log(token);
+        localStorage.setItem("access_token", token);
 
         setTimeout(() => {
           navigate("/");

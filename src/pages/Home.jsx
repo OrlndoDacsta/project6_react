@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../component/Navbar";
+import { Link } from "react-router-dom";
 const Home = () => {
   const [data, setData] = useState([]);
 
@@ -37,7 +38,7 @@ const Home = () => {
       <h1>Home</h1>
 
       {data.map((item) => (
-        <div key={item.id}>
+        <Link style={{ textDecoration: "none", color: "black" }} to={`/menu/${item.id}`} key={item.id}>
           <img
             style={{ width: "200px", height: "200px" }}
             src={item.imageUrl}
@@ -45,7 +46,7 @@ const Home = () => {
           />
           <p>{item.name}</p>
           <p>{item.priceFormatted}</p>
-        </div>
+        </Link>
       ))}
     </div>
   );
